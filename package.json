@@ -2,13 +2,22 @@
   "name": "assemblyscript-game-of-life",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "asbuild": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize"
+    "start": "webpack-dev-server",
+    "build": "webpack-cli",
+    "asbuild": "asc assembly/index.ts -b dist/gameoflife.wasm --sourceMap --validate --optimize"
   },
-  "author": "",
+  "author": "ReFruity",
   "license": "ISC",
   "devDependencies": {
-    "assemblyscript": "github:AssemblyScript/assemblyscript"
+    "assemblyscript": "github:AssemblyScript/assemblyscript",
+    "copy-webpack-plugin": "^5.0.4",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
