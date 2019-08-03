@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack-cli",
-    "asbuild": "asc assembly/index.ts -b dist/gameoflife.wasm --sourceMap --validate --optimize"
+    "asbuild": "asc assembly/index.ts -b dist/gameoflife.wasm --sourceMap --validate --optimize --importMemory"
   },
   "author": "ReFruity",
   "license": "ISC",
