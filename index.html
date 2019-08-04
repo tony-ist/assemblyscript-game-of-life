@@ -10,10 +10,33 @@
         margin: 0;
         text-align: center;
       }
+
+      #widthLabel, #heightLabel, #fpsCounter {
+        background: white;
+        position: absolute;
+      }
+
+      #fpsCounter {
+        top: 0;
+        right: 0;
+      }
+
+      #widthLabel {
+        top: 0;
+        left: 0
+      }
+
+      #heightLabel {
+        top: 18px;
+        left: 0;
+      }
     </style>
   </head>
   <body>
   <canvas id="canvas"></canvas>
+  <div id="widthLabel"></div>
+  <div id="heightLabel"></div>
+  <div id="fpsCounter"></div>
   <script type="text/javascript" src="bundle.js"></script>
   </body>
 </html>

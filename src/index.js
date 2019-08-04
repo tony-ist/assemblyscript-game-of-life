@@ -85,18 +85,35 @@ const Main = (async () => {
   console.log('height:', height)
 
   canvas.onclick = () => {
-    console.log(memoryView.slice(width * height))
     obj.instance.exports.step()
-    console.log(memoryView.slice(width * height))
     imageDataView.set(memoryView.slice(0, width * height))
     context.putImageData(imageData, 0, 0)
   }
 
-  while (true) {
+  let deltaTime
+  const fpsCounter = document.getElementById('fpsCounter')
+  document.getElementById('widthLabel').innerText = `Width: ${width}`
+  document.getElementById('heightLabel').innerText = `Height: ${height}`
 
-
-    break
+  function cycle() {
+    const startTime = new Date()
+    obj.instance.exports.step()
+    console.log(1000 / (new Date - startTime))
+    imageDataView.set(memoryView.slice(0, width * height))
+    context.putImageData(imageData, 0, 0)
+    const endTime = new Date()
+    deltaTime = endTime - startTime
+    setTimeout(cycle, 1)
   }
+
+  function updateFPS() {
+    const FPS = Math.round(1000 / deltaTime)
+    fpsCounter.innerText = `FPS: ${FPS}`
+    setTimeout(updateFPS, 1000)
+  }
+
+  cycle()
+  updateFPS()
 })
 
 window.onload = Main
