@@ -36,15 +36,21 @@ const Main = (async () => {
   imageDataView.set(GameOfLife.memoryView.slice(0, width * height))
   context.putImageData(imageData, 0, 0)
 
-  canvas.onmousedown = (e) => {
-    // splash
-    console.log(e)
-  }
+  let painting = false
+  let brushX, brushY
 
-  canvas.onmouseup = (e) => {
-    // splash
-    console.log(e)
-  }
+  canvas.addEventListener('mousedown', (e) => {
+    painting = true
+  })
+
+  canvas.addEventListener('mousemove', (e) => {
+    brushX = e.offsetX
+    brushY = e.offsetY
+  })
+
+  canvas.addEventListener('mouseup', (e) => {
+    painting = false
+  })
 
   let deltaTime
   const fpsCounter = document.getElementById('fpsCounter')
@@ -53,6 +59,11 @@ const Main = (async () => {
 
   function cycle() {
     const startTime = new Date()
+
+    if (painting) {
+      GameOfLife.paint(brushX, brushY)
+    }
+
     GameOfLife.step()
     imageDataView.set(GameOfLife.memoryView.slice(0, width * height))
     context.putImageData(imageData, 0, 0)

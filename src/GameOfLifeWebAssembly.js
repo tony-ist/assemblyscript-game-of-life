@@ -22,15 +22,12 @@ export default async (width, height) => {
     }
   }
 
-  const obj = await WebAssembly.instantiateStreaming(fetch('gameoflife.wasm'), importObject)
-  console.log(obj)
-  // obj.instance.exports.step()
-  // obj.instance.exports.randomize()
-  console.log(memoryView)
+  const game = await WebAssembly.instantiateStreaming(fetch('gameoflife.wasm'), importObject)
+  const { step, randomize, paint } = game.instance.exports
 
   function f(x) {
     console.log('f', x)
   }
 
-  return { step: obj.instance.exports.step, randomize: obj.instance.exports.randomize, memoryView }
+  return { step, randomize, paint, memoryView }
 }

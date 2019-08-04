@@ -8,7 +8,7 @@ declare const HEIGHT: i32
 declare function f(x: i32): void
 
 const PIXELS: i32 = WIDTH * HEIGHT
-const SECONDARY_MEMORY_OFFSET: i32 = PIXELS << 2
+const SECONDARY_MEMORY_OFFSET: i32 = PIXELS * 4
 
 const BLACK = 0xFF000000
 const WHITE = 0
@@ -38,7 +38,7 @@ function getSecondary(x: i32, y: i32): u32 {
 }
 
 function toPointer(x: i32, y: i32): i32 {
-  return (y * WIDTH + x) << 2
+  return (y * WIDTH + x) * 4
 }
 
 function isAlive(value: u32): i32 {
@@ -73,11 +73,14 @@ function clearMemory(): void {
   }
 }
 
+function isInBoundaries(x: i32, y: i32): boolean {
+  return x > 0 && x < WIDTH - 1 && y > 0 && y < HEIGHT - 1
+}
+
 export function randomize(): void {
   clearMemory()
 
   for (let i: i32 = 0; i < PIXELS; i++) {
-    // f(i)
     const randomX: i32 = i32(Math.random() * WIDTH)
     const randomY: i32 = i32(Math.random() * HEIGHT)
 
@@ -85,33 +88,11 @@ export function randomize(): void {
       continue
     }
 
-    // f(randomX)
-    // f(randomY)
-
     set(randomX, randomY)
   }
 }
 
 export function step(): void {
-  // clear(0, 0)
-  // clear(1, 0)
-  // clear(2, 0)
-  // clear(3, 0)
-  // set(0, 0)
-  // set(0, 1)
-  // set(1, 0)
-  // set(1, 1)
-  // f(get(0, 0))
-  // f(get(0, 1))
-  // f(get(1, 0))
-  // f(get(1, 1))
-
-  // set(0, 0)
-  // f(get(0, 0))
-  //
-  // setSecondary(0, 0)
-  // f(getSecondary(1, 0))
-  
   for (let i: i32 = 1; i < WIDTH - 1; i++) {
     for (let j: i32 = 1; j < HEIGHT - 1; j++) {
       const aliveNeighbours: i32 = aliveNeighbours(i, j)
@@ -159,6 +140,18 @@ export function step(): void {
   copySecondaryToPrimary()
 }
 
-export function splash(x: i32, y: i32): void {
+export function paint(x: i32, y: i32): void {
+  const size = 50
 
+  for (let i: i32 = -size / 2; i < size / 2; i++) {
+    if (isInBoundaries(x + i, y)) {
+      set(x + i, y)
+    }
+  }
+
+  for (let i: i32 = -size / 2; i < size / 2; i++) {
+    if (isInBoundaries(x, y + i)) {
+      set(x, y + i)
+    }
+  }
 }

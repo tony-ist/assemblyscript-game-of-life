@@ -14,6 +14,7 @@
       #widthLabel, #heightLabel, #fpsCounter, #controls {
         background: white;
         position: absolute;
+        user-select: none;
       }
 
       #fpsCounter {
@@ -44,9 +45,9 @@
   <div id="heightLabel"></div>
   <div id="fpsCounter"></div>
   <div id="controls">
-    <div>WebAssembly</div>
+    <label for="radioWebAssembly">WebAssembly</label>
     <input id="radioWebAssembly" name="controls" type="radio" checked="checked">
-    <div>JS</div>
+    <label for="radioJS">JS</label>
     <input id="radioJS" name="controls" type="radio">
   </div>
   <script type="text/javascript" src="bundle.js"></script>
