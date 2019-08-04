@@ -158,3 +158,7 @@ export function step(): void {
 
   copySecondaryToPrimary()
 }
+
+export function splash(x: i32, y: i32): void {
+
+}

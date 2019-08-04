@@ -11,13 +11,19 @@
         text-align: center;
       }
 
-      #widthLabel, #heightLabel, #fpsCounter {
+      #widthLabel, #heightLabel, #fpsCounter, #controls {
         background: white;
         position: absolute;
       }
 
       #fpsCounter {
         top: 0;
+        right: 0;
+      }
+
+      #controls {
+        display: flex;
+        top: 18px;
         right: 0;
       }
 
@@ -37,6 +43,12 @@
   <div id="widthLabel"></div>
   <div id="heightLabel"></div>
   <div id="fpsCounter"></div>
+  <div id="controls">
+    <div>WebAssembly</div>
+    <input id="radioWebAssembly" name="controls" type="radio" checked="checked">
+    <div>JS</div>
+    <input id="radioJS" name="controls" type="radio">
+  </div>
   <script type="text/javascript" src="bundle.js"></script>
   </body>
 </html>
