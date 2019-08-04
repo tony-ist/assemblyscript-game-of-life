@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack-cli",
-    "asbuild": "asc assembly/index.ts -b dist/gameoflife.wasm --sourceMap --validate --optimize --importMemory"
+    "asbuild": "asc assembly/index.ts -b dist/gameoflife.wasm --validate --optimize --importMemory --use Math=JSMath"
   },
   "author": "ReFruity",
   "license": "ISC",
@@ -18,6 +18,5 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
   }
 }
