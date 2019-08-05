@@ -13,38 +13,47 @@ const SECONDARY_MEMORY_OFFSET: i32 = PIXELS * 4
 const BLACK = 0xFF000000
 const WHITE = 0
 
+@inline()
 function set(x: i32, y: i32, pointerOffset: i32 = 0): void {
   store<u32>(toPointer(x, y) + pointerOffset, BLACK)
 }
 
+@inline()
 function setSecondary(x: i32, y: i32): void {
   set(x, y, SECONDARY_MEMORY_OFFSET)
 }
 
+@inline()
 function clear(x: i32, y: i32, pointerOffset: i32 = 0): void {
   store<u32>(toPointer(x, y) + pointerOffset, WHITE)
 }
 
+@inline()
 function clearSecondary(x: i32, y: i32): void {
   clear(x, y, SECONDARY_MEMORY_OFFSET)
 }
 
+@inline()
 function get(x: i32, y: i32, pointerOffset: i32 = 0): u32 {
   return load<u32>(toPointer(x, y) + pointerOffset)
 }
 
+@inline()
 function getSecondary(x: i32, y: i32): u32 {
   return get(x, y, SECONDARY_MEMORY_OFFSET)
 }
 
+@inline()
 function toPointer(x: i32, y: i32): i32 {
   return (y * WIDTH + x) * 4
 }
 
+@inline()
 function isAlive(value: u32): i32 {
   return value === BLACK ? 1 : 0
 }
 
+@inline()
 function aliveNeighbours(x: i32, y: i32): i32 {
   return isAlive(get(x - 1, y - 1)) +
     isAlive(get(x, y - 1)) +
@@ -56,6 +65,7 @@ function aliveNeighbours(x: i32, y: i32): i32 {
     isAlive(get(x + 1, y - 1))
 }
 
+@inline()
 function copySecondaryToPrimary(): void {
   const sizeOfU32 = 4
 
