@@ -1,3 +1,5 @@
+import GameOfLife from '../compiled/gameoflife.wasm'
+
 export default async (width, height) => {
   const memory = new WebAssembly.Memory({ initial: 256 })
   const memoryView = new Uint32Array(memory.buffer)
@@ -15,14 +17,7 @@ export default async (width, height) => {
     Math
   }
 
-  if (!WebAssembly.instantiateStreaming) {
-    WebAssembly.instantiateStreaming = async (resp, importObject) => {
-      const source = await (await resp).arrayBuffer()
-      return await WebAssembly.instantiate(source, importObject)
-    }
-  }
-
-  const game = await WebAssembly.instantiateStreaming(fetch('gameoflife.wasm'), importObject)
+  const game = await GameOfLife(importObject)
   const { step, randomize, paint } = game.instance.exports
 
   function f(x) {

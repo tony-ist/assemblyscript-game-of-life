@@ -3,9 +3,27 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   resolve: {
     extensions: [ '.js' ]
+  },
+  module: {
+    defaultRules: [
+      {
+        type: "javascript/auto",
+        resolve: {}
+      },
+      {
+        test: /\.json$/i,
+        type: "json"
+      }
+    ],
+    rules: [
+      {
+        test: /\.wasm$/,
+        use: 'wasm-loader'
+      }
+    ],
   },
   output: {
     filename: 'bundle.js',
