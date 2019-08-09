@@ -2,7 +2,10 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    bundle: './src/index.js',
+    benchmark: './src/benchmark.js'
+  },
   devtool: 'source-map',
   resolve: {
     extensions: [ '.js' ]
@@ -26,11 +29,14 @@ module.exports = {
     ],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    new CopyWebpackPlugin([{ from: path.resolve(__dirname, 'index.html'), to: path.resolve(__dirname, 'dist') }])
+    new CopyWebpackPlugin([
+      { from: path.resolve(__dirname, 'html', 'index.html'), to: path.resolve(__dirname, 'dist') },
+      { from: path.resolve(__dirname, 'html', 'benchmark.html'), to: path.resolve(__dirname, 'dist') }
+    ])
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

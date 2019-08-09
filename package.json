@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "npm run asbuild && webpack-cli",
-    "asbuild": "asc assembly/index.ts -b compiled/gameoflife.wasm --validate --optimize --importMemory --use Math=JSMath"
+    "asbuild": "asc assembly/index.ts -b compiled/gameoflife.wasm --validate --optimize --importMemory --use Math=JSMath",
+    "benchmark": "node src/benchmark.js"
   },
   "author": "ReFruity",
   "license": "ISC",

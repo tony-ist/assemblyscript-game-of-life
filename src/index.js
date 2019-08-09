@@ -1,7 +1,7 @@
 import GameOfLifeWebAssembly from './GameOfLifeWebAssembly'
 import GameOfLifeJS from './GameOfLifeJS'
 
-const Main = (async () => {
+async function Main() {
   const width = window.innerWidth - 10
   const height = window.innerHeight - 10
 
@@ -80,6 +80,6 @@ const Main = (async () => {
 
   cycle()
   updateFPS()
-})
+}
 
-window.onload = Main
+window.addEventListener('load', Main)
