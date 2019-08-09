@@ -53,7 +53,10 @@ async function Main() {
   })
 
   let deltaTime
+  let sumDeltaTime = 0
+  let cycles = 0
   const fpsCounter = document.getElementById('fpsCounter')
+  fpsCounter.innerText = 'FPS: 0'
   document.getElementById('widthLabel').innerText = `Width: ${width}`
   document.getElementById('heightLabel').innerText = `Height: ${height}`
 
@@ -69,17 +72,21 @@ async function Main() {
     context.putImageData(imageData, 0, 0)
     const endTime = new Date()
     deltaTime = endTime - startTime
-    setTimeout(cycle, 1)
-  }
 
-  function updateFPS() {
-    const FPS = Math.round(1000 / deltaTime)
-    fpsCounter.innerText = `FPS: ${FPS}`
-    setTimeout(updateFPS, 1000)
+    sumDeltaTime += deltaTime
+    cycles += 1
+
+    if (sumDeltaTime > 1000) {
+      const FPS = Math.round(1000 / (sumDeltaTime / cycles))
+      fpsCounter.innerText = `FPS: ${FPS}`
+      sumDeltaTime = 0
+      cycles = 0
+    }
+
+    requestAnimationFrame(cycle)
   }
 
   cycle()
-  updateFPS()
 }
 
 window.addEventListener('load', Main)
